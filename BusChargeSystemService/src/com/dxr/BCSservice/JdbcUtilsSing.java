@@ -14,7 +14,7 @@ public final class JdbcUtilsSing {
     private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/bus_charge_system?characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     // 数据库的用户名与密码，需要根据自己的设置
     private static final String USER = "BCSAdmin";
-    private static final String PASS = "bJXhYu7e8EH4mzNT";
+    private static final String PASS = "123456"; // bJXhYu7e8EH4mzNT
 
     private static final JdbcUtilsSing instance = new JdbcUtilsSing();
 
