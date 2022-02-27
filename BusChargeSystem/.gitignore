@@ -1,0 +1,6 @@
+
+# ignore OBJ
+OBJ/
+
+# ignore .vscode
+USER/.vscode/

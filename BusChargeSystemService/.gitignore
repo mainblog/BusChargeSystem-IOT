@@ -1,0 +1,6 @@
+
+# idea ignore
+.idea/
+*.iml
+out/
+
