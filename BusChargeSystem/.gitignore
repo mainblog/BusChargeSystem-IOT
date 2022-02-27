@@ -1,6 +1,8 @@
 
-# ignore OBJ
-OBJ/
+# ignore out file
+OBJ/ 
+*.uvoptx
+*.DXR
 
 # ignore .vscode
 USER/.vscode/
