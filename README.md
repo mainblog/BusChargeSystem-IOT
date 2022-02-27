@@ -71,7 +71,7 @@
 
 + .\sql\为数据库脚本，安装mysql，导入bus_charge_system.sql脚本
 + 数据库名称为：bus_charge_system
-+ 数据库默认账号：BCSAdmin 密码：bJXhYu7e8EH4mzNT
++ 默认账号：BCSAdmin 密码：123456
 + .\BusChargeSystem\为服务端代码，请使用IntelliJ IDEA打开
 + 启动服务端程序，默认端口为8888
 
@@ -101,6 +101,7 @@ ESP8266:
 
 ### 4.2 服务端部署
 
++ 在数据库管理软件中导入./sql/目录下的bus_charge_system.sql脚本
 + 将.\BusChargeSystemService目录下的Java程序打包成Jar包并上传到云服务器
 + 在云服务器上将8888端口加入安全组
 + 在终端执行Jar包，命令如下：
