@@ -27,7 +27,7 @@ public final class JdbcUtilsSing {
         }
     }
 
-    public JdbcUtilsSing() {
+    private JdbcUtilsSing() {
     }
 
     /**
