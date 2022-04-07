@@ -74,13 +74,13 @@ const uint16_t port = 8888;
 
 | STM32F407 | RFID 模块 |
 | --------- | --------- |
-| 3.3V      | VCC       |
-| GND       | GND       |
-| PC10      | CLK       |
-| PC11      | MISO      |
+| PA4       | SDA       |
+| PC10      | SCK       |
 | PC12      | MOSI      |
-| PA4       | NSS       |
+| PC11      | MISO      |
+| GND       | GND       |
 | PA6       | RST       |
+| 3.3V      | VCC       |
 
 | STM32F407 | ESP8266 |
 | --------- | ------- |

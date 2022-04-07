@@ -23,10 +23,10 @@
 // #include "rtc.h"
 
 /** RFID接线方式
-	PC10 -- CLK
-	PC11 -- MISO
+ * 	PA4  -- SDA
+	PC10 -- SCK
 	PC12 -- MOSI
-	PA4  -- NSS
+	PC11 -- MISO
 	PA6  -- RST
 */
 /**
