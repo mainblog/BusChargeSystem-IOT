@@ -10,18 +10,15 @@
 const char *ssid = STASSID;
 const char *password = STAPSK;
 
-// const char *host = "192.168.137.1";
-const char *host = "120.25.221.146";
+// 服务器IP地址 和 端口
+const char *host = "192.168.137.1";
 const uint16_t port = 8888;
 
 void setup()
 {
   Serial.begin(115200);
-
-  Serial.println();
-  Serial.println();
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
+//  Serial.print("Connecting to ");
+//  Serial.println(ssid);
 
   WiFi.mode(WIFI_STA);    // STA模式 即连接模式
   WiFi.begin(ssid, password); // 连接到wifi网络
@@ -29,14 +26,14 @@ void setup()
   while (WiFi.status() != WL_CONNECTED)
   {
     delay(500);
-    Serial.print(".");
+//    Serial.print(".");
   }
 
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
-  // Serial.flush();
+//  Serial.println("");
+//  Serial.println("WiFi connected");
+//  Serial.println("IP address: ");
+//  Serial.println(WiFi.localIP());
+  Serial.flush();
 }
 
 char recvBuf[BUF_SIZE];
@@ -52,13 +49,15 @@ void sendData(char *buf)
   WiFiClient client;
   while (!client.connect(host, port))
   {
-    Serial.write("connection failed\r\n");
+//    Serial.write("connection failed\r\n");
     delay(2000);
   }
   if (client.connected())
   {
     client.write(buf);
   }
+  Serial.flush();
+  client.flush();
   /* 等待服务器返回数据 */
   unsigned long timeout = millis();
   while (client.available() == 0)
@@ -66,7 +65,8 @@ void sendData(char *buf)
     /* 10秒内服务器都没有回复响应 则超时关闭连接 */
     if (millis() - timeout > 10000)
     {
-      Serial.write(">>> Client Timeout !\r\n");
+//      Serial.write(">>> Client Timeout !\r\n");
+//      Serial.flush();
       client.stop();
       return;
     }
@@ -75,10 +75,9 @@ void sendData(char *buf)
   int len = client.available();
   if (len > BUF_SIZE) // 服务器返回的数据长度超出缓存区大小
   {
-    while (client.read() >= 0)
-    {
-    }
-    Serial.write("len error\r\n");
+//    Serial.write("len error\r\n");
+//    Serial.flush();
+//    client.flush();
     client.stop(); // 关闭连接
     return;
   }
@@ -100,15 +99,17 @@ void sendData(char *buf)
     }
     if (data == 0x5D && startByte)
     {
-      bufIndex |= 0x8000; // 接收到数户据的标志
+      bufIndex |= 0x8000; // 接收到数户据的结束标志
       startByte = false;
     }
   }
   if (bufIndex & 0x8000)
   {
     Serial.write(sendBuf); // 向串口发送数据
-    Serial.write("\r\n");
+    Serial.write("\r\n"); // 因为定义了STM32的合法串口数据以\r\n结尾
   }
+  Serial.flush(); // 每次发送出去都要清空一下缓冲区 避免下次发送出错
+  client.flush();
   free(sendBuf);
   client.stop(); // 关闭连接
 }
@@ -130,7 +131,7 @@ void loop()
     }
     if (data == 0x5D && startByte)
     {
-      bufIndex |= 0x8000; // 接收到数户据的标志
+      bufIndex |= 0x8000; // 接收到数户据的结束标志
       startByte = false;
     }
   }
